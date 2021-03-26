@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Donations from '../pages/Donations';
 
 //import SignIn from '../pages/Signin';
 import SignUp from '../pages/SignUp';
@@ -11,6 +12,7 @@ import SignUp from '../pages/SignUp';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={SignUp} />
+    <Route path="/donations" exact component={Donations} />
     {/* <Route path="/signup" component={SignUp} /> */}
     {/* <Route path="/forgot-password" component={ForgotPassword} />
     <Route path="/reset-password" component={ResetPassword} />

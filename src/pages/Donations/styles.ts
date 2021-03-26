@@ -33,6 +33,17 @@ export const LeftBox = styled.div`
   flex-direction: column;
   flex: 1;
   height: 500px;
+
+  ul {
+    li {
+      list-style-type: none;
+      font-size: 32px;
+    }
+    a {
+      text-decoration: none;
+      color: #3d80cc;
+    }
+  }
 `;
 
 export const InfoBox = styled.div`
@@ -43,6 +54,18 @@ export const InfoBox = styled.div`
   align-items: center;
   margin: 10px;
   margin-top: 30px;
-  width: 45%;
+  width: 65%;
+  height: 600px;
+`;
+
+export const Menubox = styled.div`
+  border: 0px solid #000;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  margin-top: 30px;
+  width: 25%;
   height: 600px;
 `;

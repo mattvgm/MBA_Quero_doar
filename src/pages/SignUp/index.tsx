@@ -1,12 +1,13 @@
 import React, { useCallback, useState } from 'react';
 
-import { Container,FormBox, InfoBox, LeftBox, Linkable,LinksBox,PageBody,TopBar } from './styles';
+import { Container,FormBox, InfoBox, LeftBox, PageBody } from './styles';
 import {HiOutlineUserCircle,HiHeart} from "react-icons/hi";
 import { Button, TextField } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns'; // choose your lib
 
 import donationBanner from '../../assets/doacao_banner.png'
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import TopBarComponent from '../../components/TopBarComponent';
 
  
 const SignUp: React.FC = () => {
@@ -16,44 +17,21 @@ const SignUp: React.FC = () => {
     const updateDate = useCallback(
         (date:any) => {
             if(date){
-
-                setSelectedBirthDay(date)
+                    setSelectedBirthDay(date)
             }
-        },
-        [],
-    )
+        },[],)
+
+        const submitForm = useCallback(()=>{
+
+            console.log("oi");
+        },[]);
+
+
 
   return(
     <Container>
 
-        <TopBar>
-            <LinksBox className='left'>
-                <div style={{display:'flex',alignItems:'center',justifyContent:'start'}}>
-
-                <HiHeart size={32}/>
-                Quero Doar
-            </div>
-            </LinksBox>
-            <LinksBox className='mid'>
-            <div style={{display:'flex',alignItems:'center',justifyContent:'end',float:'right'}}>
-                <Linkable href='#1'>Quem somos</Linkable>
-                <Linkable href='#2'>Quero doar</Linkable>
-                <Linkable href='#3'>Instituições</Linkable>
-                <Linkable href='#4'>Empresas parceiras</Linkable>
-            </div>
-
-            </LinksBox >
-            <LinksBox className='right'>
-            <div style={{display:'flex',alignItems:'center',float:'right'}}>
-                <Linkable href='' style={{marginRight:5}}>
-                    <HiOutlineUserCircle size={32}/>
-                </Linkable>
-                <Linkable href='' style={{marginRight:5}}>
-                    Olá Ana Luiza
-                </Linkable>
-            </div>
-            </LinksBox>
-        </TopBar>
+    <TopBarComponent></TopBarComponent>
 
         <PageBody>
             <InfoBox>
@@ -89,10 +67,10 @@ const SignUp: React.FC = () => {
             />
             </MuiPickersUtilsProvider>
             </p>
-            <p><TextField id="filled-6" label="email" variant="outlined"fullWidth type="E-mail" /></p>
+            <p><TextField id="filled-6" label="E-mail" variant="outlined"fullWidth type="E-mail" /></p>
             <p><TextField id="filled-4" label="Senha" variant="outlined"fullWidth type="password" /></p>
             <p><TextField id="filled-5" label="Confirmar a senha" variant="outlined"fullWidth type="password"/></p>
-            <Button variant="contained" color="primary">Cadastrar</Button>
+            <Button variant="contained" color="primary" onClick={submitForm} >Cadastrar</Button>
         </form>
                 </FormBox>
             </InfoBox>
