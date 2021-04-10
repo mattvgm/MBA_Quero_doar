@@ -10,7 +10,7 @@ import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/picker
 import TopBarComponent from '../../components/TopBarComponent';
 
  
-const SignUp: React.FC = () => {
+const SignIn: React.FC = () => {
 
     const [selectedBirthDay, setSelectedBirthDay] = useState(new Date());
 
@@ -80,4 +80,4 @@ const SignUp: React.FC = () => {
     )
 }
 
-export default SignUp;
+export default SignIn;
