@@ -6,9 +6,19 @@ import { Button, TextField } from '@material-ui/core';
 
 import DonationTable from '../../components/DonationTable';
 import TopBarComponent from '../../components/TopBarComponent';
+import { Doacao } from '../../models/Doacao';
+import { Doador } from '../../models/Doador';
+import { Cupom } from '../../models/Cupom';
+import { EmpresaParceira } from '../../models/EmpresaParceira';
+import { Instituicao } from '../../models/Instituição';
+import { Pagamento } from '../../models/Pagamento';
+
+import {fakeDonations} from "../../mockedData/mockedData"
 
 
 const Donations: React.FC = () => {
+
+const mockedDonations = fakeDonations;
 
   return(
     <Container>
@@ -30,7 +40,7 @@ const Donations: React.FC = () => {
             <InfoBox>
                 <FormBox>
                     <h1><HiHeart/>Doações realizadas</h1>
-                    <DonationTable/>
+                    <DonationTable Doacoes={mockedDonations}/>
 
                 </FormBox>
             </InfoBox>

@@ -17,6 +17,9 @@ const PaymentWindow: React.FC = () => {
         setdonationValue((event.target as HTMLInputElement).value);
       };
 
+
+      
+
   return(
     <Container>
         <TopBarComponent></TopBarComponent>

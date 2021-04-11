@@ -9,6 +9,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
+import {Doacao} from "../../models/Doacao"
+
+export interface DonationProps {
+ Doacoes:Doacao[]
+}
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -51,9 +56,22 @@ const useStyles = makeStyles({
     createData('Criança Feliz', "XXXX XXXX XXXX X356", 4, "R$15,00", "20/12/2020"),
   ];
 
-const DonationTable : React.FC =()=>{
+const DonationTable : React.FC<DonationProps> =({children,
+  Doacoes,
+...rest})=>{
     const classes = useStyles();
+
+    console.log("oi");
+    console.log(Doacoes);
+
+    const donations = Doacoes.map((d)=>{
+      return createData(d.Instituicao.nome,d.Pagamento.NumeroCartao,1,"R$" + d.ValorInstituicao.toString(),d.DataDoacao.toLocaleDateString("pt-BR"))
+    })
+
+
     return(
+
+
 <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
@@ -66,7 +84,7 @@ const DonationTable : React.FC =()=>{
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {donations.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
                 {row.name}
