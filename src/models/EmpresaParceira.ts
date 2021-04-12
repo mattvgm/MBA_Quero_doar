@@ -5,6 +5,7 @@ export interface EmpresaParceira {
   site: string;
   pessoaContato: string;
   telefone: string;
+
   email: string;
   password: string;
 }

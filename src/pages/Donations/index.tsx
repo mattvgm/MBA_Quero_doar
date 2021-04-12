@@ -14,6 +14,7 @@ import { Instituicao } from '../../models/Instituição';
 import { Pagamento } from '../../models/Pagamento';
 
 import {fakeDonations} from "../../mockedData/mockedData"
+import LoggedMenu from '../../components/LoggedMenu';
 
 
 const Donations: React.FC = () => {
@@ -26,16 +27,7 @@ const mockedDonations = fakeDonations;
 
         <PageBody>
             <Menubox>
-                <LeftBox>
-                    <b>Minha Conta</b>
-                    <ul>
-                        
-                        <li><a href="https://"><HiHeart size={32}/> Doações Realizadas</a></li>
-                        <li><a href="https://"><HiGift size={32}/> Cupons</a></li>
-                        <li><a href="https://"><HiHome size={32}/> Instituições Amparadas</a></li>
-                        <li><a href="https://"><HiIdentification size={32}/> Meu Cadastro</a></li>
-                    </ul>
-                </LeftBox>
+                <LoggedMenu/>
             </Menubox>
             <InfoBox>
                 <FormBox>

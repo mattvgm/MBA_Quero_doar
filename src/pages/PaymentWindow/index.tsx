@@ -3,10 +3,11 @@ import React, { useCallback, useState } from 'react';
 import { Container,FormBox, InfoBox,Menubox, LeftBox, PageBody,DonationSelect,PaymentBox,CCSelect } from './styles';
 import {HiOutlineUserCircle,HiHeart ,HiHome ,HiIdentification, HiGift} from "react-icons/hi";
 import { AppBar, Button, ButtonGroup, FormControlLabel, FormLabel, Radio, RadioGroup, Tab, Tabs, TextField } from '@material-ui/core';
-
+import { Link, useHistory } from 'react-router-dom';
 import DonationTable from '../../components/DonationTable';
 import TopBarComponent from '../../components/TopBarComponent';
 import CreditCardForm from '../../components/CreditCardForm';
+import LoggedMenu from '../../components/LoggedMenu';
 
 
 const PaymentWindow: React.FC = () => {
@@ -26,16 +27,7 @@ const PaymentWindow: React.FC = () => {
 
         <PageBody>
             <Menubox>
-                <LeftBox>
-                    <b>Minha Conta</b>
-                    <ul>
-                        
-                        <li><a href="https://"><HiHeart size={32}/> Doações Realizadas</a></li>
-                        <li><a href="https://"><HiGift size={32}/> Cupons</a></li>
-                        <li><a href="https://"><HiHome size={32}/> Instituições Amparadas</a></li>
-                        <li><a href="https://"><HiIdentification size={32}/> Meu Cadastro</a></li>
-                    </ul>
-                </LeftBox>
+                <LoggedMenu/>
             </Menubox>
 
             <InfoBox>
@@ -58,7 +50,7 @@ const PaymentWindow: React.FC = () => {
                         <CCSelect>
                         <CreditCardForm/>
                         <form action="https://alo" method="post">
-                            <Button  variant="contained" color="primary" >Realizar o pagameno</Button>
+                            <Button  variant="contained" color="primary" component={Link} to="/donations" >Realizar o pagameno</Button>
                         </form>
                         </CCSelect>
                     </PaymentBox>

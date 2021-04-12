@@ -7,7 +7,7 @@ export interface Doacao {
   _id: string;
   Doador: Doador;
   Instituicao: Instituicao;
-  Cupom: Cupom;
+  Cupom: Cupom[];
   DataDoacao: Date;
   Pagamento: Pagamento;
   ValorInstituicao: number;

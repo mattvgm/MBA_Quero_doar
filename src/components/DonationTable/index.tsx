@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
+
 import PropTypes from 'prop-types';
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {HiOutlineUserCircle,HiHeart ,HiHome ,HiIdentification, HiGift} from "react-icons/hi";
@@ -10,6 +11,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
 import {Doacao} from "../../models/Doacao"
+import { Button } from "@material-ui/core";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { fakeDonations } from "../../mockedData/mockedData";
 
 export interface DonationProps {
  Doacoes:Doacao[]
@@ -38,40 +46,52 @@ const StyledTableRow = withStyles((theme: Theme) =>
 )(TableRow);
 
 const useStyles = makeStyles({
-    
     table: {
       minWidth: 650,
     },
   });
   
-  function createData(name: string, cc_number: string, cupons_number: number, donation_amount: string, donation_date: string) {
-    return { name, cc_number, cupons_number, donation_amount, donation_date };
+  function createData(id:string,name: string, cc_number: string, cupons_number: number, donation_amount: string, donation_date: string) {
+    return {id, name, cc_number, cupons_number, donation_amount, donation_date };
   }
   
-  const rows = [
-    createData('Amigos da rua', "XXXX XXXX XXXX 7896", 6, "R$24,00", "14/03/2021"),
-    createData('Leões da noite', "XXXX XXXX XXXX 1237", 9, "R$37,00", "24/02/2021"),
-    createData('SP sem fome', "XXXX XXXX XXXX X262", 16, "R$60,00", "05/01/2021"),
-    createData('VIVA', "XXXX XXXX XXXX X305", 3, "R$100,00", "21/12/2020"),
-    createData('Criança Feliz', "XXXX XXXX XXXX X356", 4, "R$15,00", "20/12/2020"),
-  ];
+
+  
 
 const DonationTable : React.FC<DonationProps> =({children,
   Doacoes,
 ...rest})=>{
+
     const classes = useStyles();
+    
+    const [currentDonation, setCurrentDonation] = useState<Doacao>(fakeDonations[0]);
 
-    console.log("oi");
-    console.log(Doacoes);
+    const [open, setOpen] = useState(false);
 
-    const donations = Doacoes.map((d)=>{
-      return createData(d.Instituicao.nome,d.Pagamento.NumeroCartao,1,"R$" + d.ValorInstituicao.toString(),d.DataDoacao.toLocaleDateString("pt-BR"))
-    })
+
+
+    const handleClickOpenDialog=  useCallback(
+      (data:any) => {
+        setCurrentDonation(data);
+        setOpen(true);
+        // setCurrentDonation((state)=>{
+        //   console.log(state);
+        //   //setOpen(true);
+        //   return state;
+        // });
+      },
+      [],
+    )
+  
+
+    function handleClose() {
+      setOpen(false);
+    }
 
 
     return(
 
-
+      
 <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
@@ -81,22 +101,76 @@ const DonationTable : React.FC<DonationProps> =({children,
             <StyledTableCell align="right">Cupons</StyledTableCell>
             <StyledTableCell align="right">Valor</StyledTableCell>
             <StyledTableCell align="right">Data</StyledTableCell>
+            <StyledTableCell align="right">Data</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {donations.map((row) => (
-            <StyledTableRow key={row.name}>
+          {Doacoes?Doacoes.map((row) => (
+            <StyledTableRow key={row.Instituicao.nome}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.Instituicao.nome}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.cc_number}</StyledTableCell>
-              <StyledTableCell align="right">{row.cupons_number}</StyledTableCell>
-              <StyledTableCell align="right">{row.donation_amount}</StyledTableCell>
-              <StyledTableCell align="right">{row.donation_date}</StyledTableCell>
+              <StyledTableCell align="right">{row.Pagamento.NumeroCartao}</StyledTableCell>
+              <StyledTableCell align="right">{row.Cupom.length}</StyledTableCell>
+              <StyledTableCell align="right">{"R$" + row.ValorInstituicao}</StyledTableCell>
+              <StyledTableCell align="right">{row.DataDoacao.toLocaleDateString("pt-BR")}</StyledTableCell>
+              <StyledTableCell align="right">
+                <Button  variant="outlined" color="primary" onClick={()=>{handleClickOpenDialog(row)}}>Abrir</Button>
+              </StyledTableCell>
             </StyledTableRow>
-          ))}
+          )):"Empty"}
         </TableBody>
       </Table>
+
+
+      {/* DIALOG  */}
+
+
+      <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title">{currentDonation.Instituicao.nome}</DialogTitle>
+
+      <DialogContent>
+
+        <DialogContentText id="alert-dialog-description">
+          Veja aqui os cupons relacionados à esta doação de forma fácil
+
+        </DialogContentText>
+        <Table >
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Cupom</StyledTableCell>
+            <StyledTableCell align="right">Descrição</StyledTableCell>
+            <StyledTableCell align="right">Empresa</StyledTableCell>
+            <StyledTableCell align="right">Validade</StyledTableCell>
+            <StyledTableCell align="right">Ativo</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentDonation && currentDonation.Cupom ? currentDonation.Cupom.map((cupom) => {
+            
+            return(
+            <StyledTableRow key={cupom.Nome}>
+              <StyledTableCell component="th" scope="row">
+                {cupom.Nome}
+              </StyledTableCell>
+              <StyledTableCell align="right">{cupom.Descricao}</StyledTableCell>
+              <StyledTableCell align="right">{cupom.EmpresaParceria.nome}</StyledTableCell>
+              <StyledTableCell align="right">{cupom.DataValidade.toLocaleDateString("pt-BR")}</StyledTableCell>
+              <StyledTableCell align="right">{cupom.Ativo ? "Ativo" : "Vencido"}</StyledTableCell>
+            </StyledTableRow>
+            )
+            }) : "Loading"}
+        </TableBody>
+      </Table>
+      </DialogContent>
+
+    </Dialog>
+
     </TableContainer>
     )
 }

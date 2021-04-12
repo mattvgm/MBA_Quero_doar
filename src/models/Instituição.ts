@@ -8,7 +8,9 @@ export interface Instituicao {
   nome: string;
   setorAtuacaoVM: SetorAtuacaoVM;
   cnpj: string;
+  foto: string;
   site: string;
+  descricao: string;
   pessoaContato: string;
   telefone: string;
   email: string;
