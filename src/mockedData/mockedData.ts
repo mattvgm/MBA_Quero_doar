@@ -46,6 +46,19 @@ export const fakeEmpresas: EmpresaParceira[] = [
     password: "23442",
     pessoaContato: "Sonia",
     site: "ifood.com",
+    foto:
+      "https://cdn.freelogovectors.net/wp-content/uploads/2020/10/ifood-logo.png",
+    telefone: "1231231",
+  },
+  {
+    id: "6456456456",
+    nome: "Uber",
+    cnpj: "1231231312",
+    email: "Uber@ifood.com",
+    password: "23442",
+    pessoaContato: "Marcia",
+    site: "Uber.com",
+    foto: "https://pngimg.com/uploads/uber/uber_PNG24.png",
     telefone: "1231231",
   },
 ];
@@ -134,7 +147,7 @@ export const fakeDonations: Doacao[] = [
     Doador: fakeDoadores[0],
     Instituicao: fakeInstituicoes[0],
     Pagamento: fakePagamentos[0],
-    ValorInstituicao: 150.0,
+    ValorInstituicao: 35.0,
   },
   {
     _id: "1234567",
@@ -143,6 +156,6 @@ export const fakeDonations: Doacao[] = [
     Doador: fakeDoadores[0],
     Instituicao: fakeInstituicoes[1],
     Pagamento: fakePagamentos[0],
-    ValorInstituicao: 50.0,
+    ValorInstituicao: 15.0,
   },
 ];

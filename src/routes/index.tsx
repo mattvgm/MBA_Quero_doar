@@ -13,9 +13,9 @@ import Institutions from '../pages/Institutions';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/" exact component={SignUp} />
+    <Route path="/signup" exact component={SignUp} />
     <Route path="/donations" exact component={Donations} />
-    <Route path="/signin" exact component={SignIn} />
+    <Route path="/" exact component={SignIn} />
     <Route path="/payment" exact component={PaymentWindow} />
     <Route path="/Institutions" exact component={Institutions} />
     {/* <Route path="/signup" component={SignUp} /> */}

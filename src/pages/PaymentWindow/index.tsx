@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react';
 import { Container,FormBox, InfoBox,Menubox, LeftBox, PageBody,DonationSelect,PaymentBox,CCSelect } from './styles';
 import {HiOutlineUserCircle,HiHeart ,HiHome ,HiIdentification, HiGift} from "react-icons/hi";
 import { AppBar, Button, ButtonGroup, FormControlLabel, FormLabel, Radio, RadioGroup, Tab, Tabs, TextField } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import DonationTable from '../../components/DonationTable';
 import TopBarComponent from '../../components/TopBarComponent';
 import CreditCardForm from '../../components/CreditCardForm';
@@ -15,9 +15,11 @@ const PaymentWindow: React.FC = () => {
     const [donationValue, setdonationValue] = useState('10rs');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(instituicao);
         setdonationValue((event.target as HTMLInputElement).value);
       };
 
+      const {state : instituicao} = useLocation();
 
       
 
