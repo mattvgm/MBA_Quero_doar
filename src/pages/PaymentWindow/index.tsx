@@ -8,18 +8,29 @@ import DonationTable from '../../components/DonationTable';
 import TopBarComponent from '../../components/TopBarComponent';
 import CreditCardForm from '../../components/CreditCardForm';
 import LoggedMenu from '../../components/LoggedMenu';
+import { Instituicao } from '../../models/Instituição';
+import { DonationsService } from '../../services/DonationsService';
 
 
 const PaymentWindow: React.FC = () => {
 
     const [donationValue, setdonationValue] = useState('10rs');
+    const { state }: { state: any }  = useLocation();
+    let history = useHistory();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(instituicao);
+        console.log(state.instituicao);
         setdonationValue((event.target as HTMLInputElement).value);
       };
 
-      const {state : instituicao} = useLocation();
+      const CreateDonation  = useCallback(
+          () => {
+              const donationService = new DonationsService();
+              const createdDonation = donationService.CreateDonation();
+              history.push({pathname:"/donations",state:createdDonation})
+          },
+          [history],
+      )
 
       
 
@@ -38,21 +49,21 @@ const PaymentWindow: React.FC = () => {
                     <PaymentBox>
 
                         <DonationSelect>
-                            <h1>Instituição 4 patas</h1>
-                            <img src={'https://cdn.pixabay.com/photo/2019/05/15/23/34/welcome-4206177_960_720.jpg'} width={400} alt=""/>
+                            <h1>{state.instituicao.nome}</h1>
+                            <img src={state.instituicao.foto} width={400} alt=""/>
                             <h3>Escolha o valor da doação</h3>
                         
                         <RadioGroup aria-label="gender" name="gender1" value={donationValue} onChange={handleChange}>
-                            <FormControlLabel value="10rs" control={<Radio />} label="R$10,00 e ganhe 1 Cupom Ifood R$10,00" />
-                            <FormControlLabel value="15rs" control={<Radio />} label="R$15,00 e ganhe 2 Cupons Ifood R$10,00" />
-                            <FormControlLabel value="20rs" control={<Radio />} label="R$20,00 e ganhe 1 Cupom Uber de R$10,00" />
+                            <FormControlLabel value="10rs" control={<Radio />} label="R$10,00 e ganhe 1 Cupom Ifood de R$10,00" />
+                            <FormControlLabel value="15rs" control={<Radio />} label="R$15,00 e ganhe + 1 Cupom Ifood de R$15,00" />
+                            <FormControlLabel value="20rs" control={<Radio />} label="R$20,00 e ganhe + 1 Cupom Uber de de R$10,00" />
                         </RadioGroup>
 
                         </DonationSelect>
                         <CCSelect>
                         <CreditCardForm/>
                         <form action="https://alo" method="post">
-                            <Button  variant="contained" color="primary" component={Link} to="/donations" >Realizar o pagameno</Button>
+                            <Button  variant="contained" color="primary"  onClick={CreateDonation} >Realizar o pagameno</Button>
                         </form>
                         </CCSelect>
                     </PaymentBox>

@@ -23,6 +23,7 @@ export interface DonationProps {
  Doacoes:Doacao[]
 }
 
+
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
@@ -54,7 +55,7 @@ const useStyles = makeStyles({
   function createData(id:string,name: string, cc_number: string, cupons_number: number, donation_amount: string, donation_date: string) {
     return {id, name, cc_number, cupons_number, donation_amount, donation_date };
   }
-  
+
 
   
 
@@ -101,7 +102,7 @@ const DonationTable : React.FC<DonationProps> =({children,
             <StyledTableCell align="right">Cupons</StyledTableCell>
             <StyledTableCell align="right">Valor</StyledTableCell>
             <StyledTableCell align="right">Data</StyledTableCell>
-            <StyledTableCell align="right">Data</StyledTableCell>
+            <StyledTableCell align="right">Visualizar</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -113,7 +114,7 @@ const DonationTable : React.FC<DonationProps> =({children,
               <StyledTableCell align="right">{row.Pagamento.NumeroCartao}</StyledTableCell>
               <StyledTableCell align="right">{row.Cupom.length}</StyledTableCell>
               <StyledTableCell align="right">{"R$" + row.ValorInstituicao}</StyledTableCell>
-              <StyledTableCell align="right">{row.DataDoacao.toLocaleDateString("pt-BR")}</StyledTableCell>
+              <StyledTableCell align="right">{new Date(row.DataDoacao).toLocaleDateString("pt-BR")}</StyledTableCell>
               <StyledTableCell align="right">
                 <Button  variant="outlined" color="primary" onClick={()=>{handleClickOpenDialog(row)}}>Abrir</Button>
               </StyledTableCell>
@@ -160,7 +161,7 @@ const DonationTable : React.FC<DonationProps> =({children,
               </StyledTableCell>
               <StyledTableCell align="right">{cupom.Descricao}</StyledTableCell>
               <StyledTableCell align="right">{cupom.EmpresaParceria.nome}</StyledTableCell>
-              <StyledTableCell align="right">{cupom.DataValidade.toLocaleDateString("pt-BR")}</StyledTableCell>
+              <StyledTableCell align="right">{new Date(cupom.DataValidade).toLocaleDateString("pt-BR")}</StyledTableCell>
               <StyledTableCell align="right">{cupom.Ativo ? "Ativo" : "Vencido"}</StyledTableCell>
             </StyledTableRow>
             )

@@ -9,11 +9,16 @@ import { Carousel } from 'react-responsive-carousel';
 import { fakeInstituicoes } from '../../mockedData/mockedData';
 import { Link, useHistory } from 'react-router-dom';
 import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
+import { Instituicao } from '../../models/Instituição';
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;
   value: any;
+}
+
+interface InstProps {
+  Instituicoes:Instituicao[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -43,7 +48,10 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-const InstitutionsCarousel: React.FC = () => {
+const InstitutionsCarousel: React.FC<InstProps> =({children,
+  Instituicoes,
+...rest}) => {
+
   const history = useHistory();
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -57,7 +65,7 @@ const InstitutionsCarousel: React.FC = () => {
     <Container>
 
       <Carousel autoPlay={true} infiniteLoop showThumbs={false} showIndicators={false} showStatus={false} onChange={()=>{setValue(0)}}>
-        {fakeInstituicoes.map(instituicao =>{
+        {Instituicoes.map(instituicao =>{
           return(
             <InstBox key={instituicao.id}>
               <PicBox>

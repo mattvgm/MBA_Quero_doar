@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Container,FormBox, InfoBox,Menubox, LeftBox, PageBody,DonationSelect,PaymentBox,CCSelect } from './styles';
 import {HiOutlineUserCircle,HiHeart ,HiHome ,HiIdentification, HiGift} from "react-icons/hi";
@@ -13,6 +13,9 @@ import '@brainhubeu/react-carousel/lib/style.css';
 import InstitutionsCarousel from '../../components/InstitutionsCarousel';
 import LoggedMenu from '../../components/LoggedMenu';
 import { useHistory } from 'react-router-dom';
+import api from '../../services/api';
+import { Doacao } from '../../models/Doacao';
+import { Instituicao } from '../../models/Instituição';
 
 const Institutions: React.FC = () => {
 
@@ -21,8 +24,15 @@ const Institutions: React.FC = () => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setdonationValue((event.target as HTMLInputElement).value);
       };
-      
 
+    const [instituicoes, setinstituicoes] = useState<Instituicao[]>([{}] as Instituicao[])
+      
+      useEffect(() => {
+          const szs = api.get<Instituicao[]>("/instituicoes").then((res)=>{
+              setinstituicoes(res.data);
+          });
+          //.then((inst)=>setinstituicoes(inst))
+    }, [])
 
       
 
@@ -38,7 +48,7 @@ const Institutions: React.FC = () => {
             <InfoBox>
                 <FormBox>
                     <h2>Conheça as nossas campanhas atuais</h2>
-                    <InstitutionsCarousel/>
+                    <InstitutionsCarousel Instituicoes={instituicoes} />
                 </FormBox>
             </InfoBox>
         </PageBody>

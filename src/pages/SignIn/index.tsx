@@ -74,7 +74,7 @@ const SignUp: React.FC = () => {
                 <FormBox>
                     <h2><HiUsers size={20}/> Entre com seu email e senha</h2>
 
-                    <form action="/action_page.php">
+                    <form action="/register">
                         <p><TextField id="filled-6" label="E-mail" variant="outlined"fullWidth type="E-mail" /></p>
                         <p><TextField id="filled-4" label="Senha" variant="outlined"fullWidth type="password" /></p>
                         <p>
