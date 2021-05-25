@@ -11,16 +11,18 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
 import {Doacao} from "../../models/Doacao"
-import { Button } from "@material-ui/core";
+import { Button, Input, TextField } from "@material-ui/core";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Instituicao } from "../../models/Instituição";
 
 export interface DonationProps {
- Doacoes:Doacao[]
+ instituicoes:Instituicao[]
 }
+
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -57,28 +59,29 @@ const useStyles = makeStyles({
 
   
 
-const DonationTable : React.FC<DonationProps> =({children,
-  Doacoes,
+const InstitutionsTables : React.FC<DonationProps> =({children,
+  instituicoes,
 ...rest})=>{
 
     const classes = useStyles();
-    
-    const [currentDonation, setCurrentDonation] = useState<Doacao>(Doacoes[0]);
-
+    const [currentDonation, setCurrentDonation] = useState<Instituicao>(instituicoes[0]);
     const [open, setOpen] = useState(false);
 
+    const [nomeForm, setNomeForm] = useState("");
+    const [CNPJForm, setCNPJForm] = useState("");
+    const [EmailForm, setEmailForm] = useState("");
+    const [ContatoForm, setContatoForm] = useState("");
+    const [ContatoTelForm, setContatoTelForm] = useState("");
+    const [DescricaoForm, setDescricaoForm] = useState("");
+    const [SiteForm, setSiteForm] = useState("");
+    const [URLFotoForm, setURLFotoForm] = useState("");
 
 
     const handleClickOpenDialog=  useCallback(
       (data:any) => {
         setCurrentDonation(data);
         setOpen(true);
-        console.log(data);
-        // setCurrentDonation((state)=>{
-        //   console.log(state);
-        //   //setOpen(true);
-        //   return state;
-        // });
+
       },
       [],
     )
@@ -88,7 +91,6 @@ const DonationTable : React.FC<DonationProps> =({children,
       setOpen(false);
     }
 
-
     return(
 
       
@@ -96,30 +98,29 @@ const DonationTable : React.FC<DonationProps> =({children,
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Instituição</StyledTableCell>
-            <StyledTableCell align="right">Cartão</StyledTableCell>
-            <StyledTableCell align="right">Cupons</StyledTableCell>
-            <StyledTableCell align="right">Valor</StyledTableCell>
-            <StyledTableCell align="right">Data</StyledTableCell>
+            <StyledTableCell>Nome</StyledTableCell>
+            <StyledTableCell align="right">Setor de Atuação</StyledTableCell>
+            <StyledTableCell align="right">E-mail</StyledTableCell>
+            <StyledTableCell align="right">Site</StyledTableCell>
             <StyledTableCell align="right">Visualizar</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {Doacoes?Doacoes.map((row) => (
-            <StyledTableRow key={row.instituicao.nome}>
+          {instituicoes?instituicoes.map((row) => (
+            <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
-                {row.instituicao.nome}
+                {row.nome}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.pagamento.NumeroCartao}</StyledTableCell>
-              <StyledTableCell align="right">{row.cupom.length}</StyledTableCell>
-              <StyledTableCell align="right">{"R$" + row.valorDoado}</StyledTableCell>
-              <StyledTableCell align="right">{new Date(row.dataDoacao).toLocaleDateString("pt-BR")}</StyledTableCell>
+              <StyledTableCell align="right">{row.setorAtuacaoVM.descricao}</StyledTableCell>
+              <StyledTableCell align="right">{row.email}</StyledTableCell>
+              <StyledTableCell align="right">{row.site}</StyledTableCell>
               <StyledTableCell align="right">
                 <Button  variant="outlined" color="primary" onClick={()=>{handleClickOpenDialog(row)}}>Abrir</Button>
               </StyledTableCell>
             </StyledTableRow>
           )):"Empty"}
         </TableBody>
+        <Button variant="outlined" color="primary" onClick={()=>{setOpen(true)}}>Adicionar novo</Button>
       </Table>
 
 
@@ -129,8 +130,10 @@ const DonationTable : React.FC<DonationProps> =({children,
       <Dialog
       open={open}
       onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{ currentDonation ? currentDonation.instituicao.nome : 'Loading'}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">TESTE</DialogTitle>
 
       <DialogContent>
 
@@ -138,7 +141,7 @@ const DonationTable : React.FC<DonationProps> =({children,
           Veja aqui os cupons relacionados à esta doação de forma fácil
 
         </DialogContentText>
-        <Table >
+        {/* <Table >
         <TableHead>
           <TableRow>
             <StyledTableCell>Cupom</StyledTableCell>
@@ -149,24 +152,34 @@ const DonationTable : React.FC<DonationProps> =({children,
           </TableRow>
         </TableHead>
         <TableBody>
-          {currentDonation && currentDonation.cupom ? currentDonation.cupom.map((cupom) => {
+          {currentDonation && currentDonation.Cupom ? currentDonation.Cupom.map((cupom) => {
             
             return(
-            <StyledTableRow key={cupom.nome}>
+            <StyledTableRow key={cupom.Nome}>
               <StyledTableCell component="th" scope="row">
-                {cupom.nome}
+                {cupom.Nome}
               </StyledTableCell>
-              <StyledTableCell align="right">{cupom.descricao}</StyledTableCell>
-              <StyledTableCell align="right">{cupom.empresaParceria.nome}</StyledTableCell>
-              <StyledTableCell align="right">{new Date().toLocaleDateString("pt-BR")}</StyledTableCell>
+              <StyledTableCell align="right">{cupom.Descricao}</StyledTableCell>
+              <StyledTableCell align="right">{cupom.EmpresaParceria.nome}</StyledTableCell>
+              <StyledTableCell align="right">{new Date(cupom.DataValidade).toLocaleDateString("pt-BR")}</StyledTableCell>
               <StyledTableCell align="right">{cupom.Ativo ? "Ativo" : "Vencido"}</StyledTableCell>
             </StyledTableRow>
             )
-            }) 
-            
-            : "Loading"}
+            }) : "Loading"}
         </TableBody>
-      </Table>
+      </Table> */}
+        <p><TextField value={nomeForm} id="filled-1" label="Nome" variant="outlined"fullWidth/></p>
+        <p><TextField id="filled-2" label="CNPJ" variant="outlined"fullWidth/></p>
+        <p><TextField id="filled-3" label="Email" variant="outlined"fullWidth/></p>
+        <p><TextField id="filled-4" label="Contato" variant="outlined"fullWidth/></p>
+        <p><TextField id="filled-5" label="Contato Telefone" variant="outlined"fullWidth/></p>
+        <p><TextField id="filled-6" label="Site" variant="outlined"fullWidth/></p>
+        <p><TextField id="filled-7" label="Descrição" variant="outlined"fullWidth/></p>
+        <p><TextField id="filled-8" label="Foto URL" variant="outlined"fullWidth/></p>
+
+        <Button variant="outlined" color="primary">Adicionar</Button>
+        <Button variant="outlined" color="primary">Alterar</Button>
+        <Button variant="outlined" color="secondary">Excluir</Button>
       </DialogContent>
 
     </Dialog>
@@ -175,4 +188,4 @@ const DonationTable : React.FC<DonationProps> =({children,
     )
 }
 
-export default DonationTable;
+export default InstitutionsTables;

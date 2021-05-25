@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+mocked_db_bkp.json
+
 # testing
 /coverage
 

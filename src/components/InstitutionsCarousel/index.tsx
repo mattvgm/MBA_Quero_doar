@@ -6,7 +6,6 @@ import { AppBar, Box, Button, ButtonGroup, makeStyles, Tab, Tabs, Theme, Typogra
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { fakeInstituicoes } from '../../mockedData/mockedData';
 import { Link, useHistory } from 'react-router-dom';
 import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
 import { Instituicao } from '../../models/Instituição';

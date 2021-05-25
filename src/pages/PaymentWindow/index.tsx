@@ -9,7 +9,6 @@ import TopBarComponent from '../../components/TopBarComponent';
 import CreditCardForm from '../../components/CreditCardForm';
 import LoggedMenu from '../../components/LoggedMenu';
 import { Instituicao } from '../../models/Instituição';
-import { DonationsService } from '../../services/DonationsService';
 
 
 const PaymentWindow: React.FC = () => {
@@ -25,15 +24,12 @@ const PaymentWindow: React.FC = () => {
 
       const CreateDonation  = useCallback(
           () => {
-              const donationService = new DonationsService();
-              const createdDonation = donationService.CreateDonation();
-              history.push({pathname:"/donations",state:createdDonation})
+              //const donationService = new DonationsService();
+              //const createdDonation = donationService.CreateDonation(state.instituicao,donationValue);
+              history.push({pathname:"/donations",state:{}})
           },
           [history],
       )
-
-      
-
   return(
     <Container>
         <TopBarComponent></TopBarComponent>
@@ -61,10 +57,10 @@ const PaymentWindow: React.FC = () => {
 
                         </DonationSelect>
                         <CCSelect>
-                        <CreditCardForm/>
-                        <form action="https://alo" method="post">
-                            <Button  variant="contained" color="primary"  onClick={CreateDonation} >Realizar o pagameno</Button>
-                        </form>
+                            <CreditCardForm/>
+                            <form action="https://alo" method="post">
+                                <Button  variant="contained" color="primary"  onClick={CreateDonation} >Realizar o pagameno</Button>
+                            </form>
                         </CCSelect>
                     </PaymentBox>
                 </FormBox>

@@ -5,10 +5,10 @@ import { Pagamento } from "./Pagamento";
 
 export interface Doacao {
   _id: string;
-  Doador: Doador;
-  Instituicao: Instituicao;
-  Cupom: Cupom[];
-  DataDoacao: Date;
-  Pagamento: Pagamento;
-  ValorInstituicao: number;
+  // Doador: Doador;
+  instituicao: Instituicao;
+  cupom: Cupom[];
+  dataDoacao: Date;
+  pagamento: Pagamento;
+  valorDoado: number;
 }

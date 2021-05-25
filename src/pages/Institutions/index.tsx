@@ -28,7 +28,7 @@ const Institutions: React.FC = () => {
     const [instituicoes, setinstituicoes] = useState<Instituicao[]>([{}] as Instituicao[])
       
       useEffect(() => {
-          const szs = api.get<Instituicao[]>("/instituicoes").then((res)=>{
+          const szs = api.get<Instituicao[]>("/instituicao").then((res)=>{
               setinstituicoes(res.data);
           });
           //.then((inst)=>setinstituicoes(inst))

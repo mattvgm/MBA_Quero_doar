@@ -11,15 +11,16 @@ import TopBarComponent from '../../components/TopBarComponent';
 import LoggedMenu from '../../components/LoggedMenu';
 import api from '../../services/api';
 import { Doacao } from '../../models/Doacao';
+import InstitutionsTables from '../../components/InstitutionsTable';
+import { Instituicao } from '../../models/Instituição';
 
 
-const Donations: React.FC = () => {
+const CRUDInstitution: React.FC = () => {
 
-const [donations, setDonations] = useState<Doacao[]>([])
+const [donations, setDonations] = useState<Instituicao[]>([])
 
 useEffect(() => {
-    const donations = api.get<Doacao[]>("/MinhasDoacoes/60ac36fa1f354d9b256cd5a6").then((res)=>{
-        console.log("==========",res.data[0]);
+    const donations = api.get<Instituicao[]>("/instituicoes").then((res)=>{
         setDonations(res.data);
     })
 }, [])
@@ -34,8 +35,9 @@ useEffect(() => {
             </Menubox>
             <InfoBox>
                 <FormBox>
-                    <h1><HiHeart/>Doações realizadas</h1>
-                    <DonationTable Doacoes={donations}/>
+                    <h1><HiHeart/>Instituições Amparadas</h1>
+
+                    <InstitutionsTables instituicoes={donations}/>
 
                 </FormBox>
             </InfoBox>
@@ -44,4 +46,4 @@ useEffect(() => {
     )
 }
 
-export default Donations;
+export default CRUDInstitution;

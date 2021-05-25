@@ -6,6 +6,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import PaymentWindow from '../pages/PaymentWindow';
 import Institutions from '../pages/Institutions';
+import CRUDInstitution from '../pages/CRUDInsti';
 // import ForgotPassword from '../pages/ForgotPassword';
 // import ResetPassword from '../pages/ResetPassword';
 // import Dashboard from '../pages/Dashboard';
@@ -18,6 +19,7 @@ const Routes: React.FC = () => (
     <Route path="/" exact component={SignIn} />
     <Route path="/payment" exact component={PaymentWindow} />
     <Route path="/Institutions" exact component={Institutions} />
+    <Route path="/CRUDInstitutions" exact component={CRUDInstitution} />
     {/* <Route path="/signup" component={SignUp} /> */}
     {/* <Route path="/forgot-password" component={ForgotPassword} />
     <Route path="/reset-password" component={ResetPassword} />
