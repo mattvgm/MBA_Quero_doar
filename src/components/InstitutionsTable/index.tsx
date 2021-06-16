@@ -111,7 +111,7 @@ const InstitutionsTables : React.FC<DonationProps> =({children,
               <StyledTableCell component="th" scope="row">
                 {row.nome}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.setorAtuacaoVM.descricao}</StyledTableCell>
+              <StyledTableCell align="right">{row.setorAtuacao.descricao}</StyledTableCell>
               <StyledTableCell align="right">{row.email}</StyledTableCell>
               <StyledTableCell align="right">{row.site}</StyledTableCell>
               <StyledTableCell align="right">
@@ -133,12 +133,12 @@ const InstitutionsTables : React.FC<DonationProps> =({children,
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">TESTE</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{currentDonation ? currentDonation.nome : "Nova Instituição"}</DialogTitle>
 
       <DialogContent>
 
         <DialogContentText id="alert-dialog-description">
-          Veja aqui os cupons relacionados à esta doação de forma fácil
+            Adicione ou edite os dados referentes à Instituição
 
         </DialogContentText>
         {/* <Table >

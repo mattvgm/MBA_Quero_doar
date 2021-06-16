@@ -1,4 +1,4 @@
-export interface SetorAtuacaoVM {
+export interface SetorAtuacao {
   id: string;
   descricao: string;
 }
@@ -6,7 +6,7 @@ export interface SetorAtuacaoVM {
 export interface Instituicao {
   id: string;
   nome: string;
-  setorAtuacaoVM: SetorAtuacaoVM;
+  setorAtuacao: SetorAtuacao;
   cnpj: string;
   foto: string;
   site: string;
@@ -15,5 +15,4 @@ export interface Instituicao {
   telefone: string;
   email: string;
   password: string;
-  setorAtuacao?: any;
 }

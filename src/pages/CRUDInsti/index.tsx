@@ -20,7 +20,7 @@ const CRUDInstitution: React.FC = () => {
 const [donations, setDonations] = useState<Instituicao[]>([])
 
 useEffect(() => {
-    const donations = api.get<Instituicao[]>("/instituicoes").then((res)=>{
+    const donations = api.get<Instituicao[]>("/Instituicao").then((res)=>{
         setDonations(res.data);
     })
 }, [])

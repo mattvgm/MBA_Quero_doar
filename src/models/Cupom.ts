@@ -7,6 +7,6 @@ export interface Cupom {
   empresaParceria: EmpresaParceira;
   Nivel: number;
   descricao: string;
-  DataValidade: Date;
+  dataValidade: Date;
   Ativo: boolean;
 }
