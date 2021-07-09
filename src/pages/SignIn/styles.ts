@@ -35,7 +35,7 @@ export const FormLinks = styled.div`
 
   a {
     text-decoration: none;
-    color: #3d80cc;
+    color: #2360a6;
     font-weight: 700;
   }
 `;
@@ -56,7 +56,7 @@ export const PartnersBox = styled.div`
   align-items: center;
   height: 200px;
   background: #fff;
-  border: 2px solid #3d80cc;
+  border: 2px solid #2360a6;
   box-shadow: 1px 1px 3px 3px #ccc; /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 `;
 

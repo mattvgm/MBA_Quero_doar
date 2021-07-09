@@ -21,7 +21,7 @@ export const LeftBox = styled.div`
     }
     a {
       text-decoration: none;
-      color: #3d80cc;
+      color: #2360a6;
     }
   }
 `;

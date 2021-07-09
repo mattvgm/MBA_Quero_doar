@@ -115,17 +115,17 @@ export const fakeEmpresas: EmpresaParceira[] = [
 //   },
 // ];
 
-// export const fakeDoadores: Doador[] = [
-//   {
-//     id: "23123132123",
-//     nome: "Ana Lucia",
-//     cpf: "12345678",
-//     dataNascimento: new Date(),
-//     email: "ana.lucia@querodoar.com",
-//     password: "teste",
-//     telefone: "12345678",
-//   },
-// ];
+export const fakeDoadores: Doador[] = [
+  {
+    id: "23123132123",
+    nome: "Joao Silva",
+    cpf: "12345678",
+    dataNascimento: new Date(),
+    email: "joao.silva@querodoar.com",
+    password: "teste",
+    telefone: "12345678",
+  },
+];
 
 // export const fakePagamentos: Pagamento[] = [
 //   {

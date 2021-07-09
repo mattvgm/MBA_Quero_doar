@@ -1,12 +1,13 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Donations from '../pages/Donations';
+import React from "react";
+import { Switch } from "react-router-dom";
+import Donations from "../pages/Donations";
 
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
-import PaymentWindow from '../pages/PaymentWindow';
-import Institutions from '../pages/Institutions';
-import CRUDInstitution from '../pages/CRUDInsti';
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
+import PaymentWindow from "../pages/PaymentWindow";
+import Institutions from "../pages/Institutions";
+import CRUDInstitution from "../pages/CRUDInsti";
+import Route from "./Route";
 // import ForgotPassword from '../pages/ForgotPassword';
 // import ResetPassword from '../pages/ResetPassword';
 // import Dashboard from '../pages/Dashboard';
@@ -15,11 +16,16 @@ import CRUDInstitution from '../pages/CRUDInsti';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/signup" exact component={SignUp} />
-    <Route path="/donations" exact component={Donations} />
     <Route path="/" exact component={SignIn} />
-    <Route path="/payment" exact component={PaymentWindow} />
-    <Route path="/Institutions" exact component={Institutions} />
-    <Route path="/CRUDInstitutions" exact component={CRUDInstitution} />
+    <Route path="/donations" exact component={Donations} isPrivate />
+    <Route path="/payment" exact component={PaymentWindow} isPrivate />
+    <Route path="/Institutions" exact component={Institutions} isPrivate />
+    <Route
+      path="/CRUDInstitutions"
+      exact
+      component={CRUDInstitution}
+      isPrivate
+    />
     {/* <Route path="/signup" component={SignUp} /> */}
     {/* <Route path="/forgot-password" component={ForgotPassword} />
     <Route path="/reset-password" component={ResetPassword} />

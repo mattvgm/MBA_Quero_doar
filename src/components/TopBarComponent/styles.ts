@@ -11,7 +11,9 @@ export const TopBar = styled.div`
   justify-content: space-around;
   align-items: center;
   padding: 2px;
-  border-bottom: #3d80cc 2px solid;
+  padding-right: 3rem;
+  padding-left: 3rem;
+  border-bottom: #2360a6 3px solid;
 
   .left {
     width: 30%;
@@ -31,7 +33,7 @@ export const LinksBox = styled.div`
 `;
 
 export const Linkable = styled.a`
-  color: #3d80cc;
+  color: #2360a6;
   font-size: 16px;
   text-decoration: none;
   margin-right: 50px;
