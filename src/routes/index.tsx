@@ -8,6 +8,7 @@ import PaymentWindow from "../pages/PaymentWindow";
 import Institutions from "../pages/Institutions";
 import CRUDInstitution from "../pages/CRUDInsti";
 import Route from "./Route";
+import MyCupons from "../pages/MyCupons";
 // import ForgotPassword from '../pages/ForgotPassword';
 // import ResetPassword from '../pages/ResetPassword';
 // import Dashboard from '../pages/Dashboard';
@@ -15,11 +16,12 @@ import Route from "./Route";
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/signup" exact component={SignUp} />
     <Route path="/" exact component={SignIn} />
+    <Route path="/signup" exact component={SignUp} />
     <Route path="/donations" exact component={Donations} isPrivate />
     <Route path="/payment" exact component={PaymentWindow} isPrivate />
     <Route path="/Institutions" exact component={Institutions} isPrivate />
+    <Route path="/cupons" exact component={MyCupons} isPrivate />
     <Route
       path="/CRUDInstitutions"
       exact
