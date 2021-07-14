@@ -1,12 +1,10 @@
 import { EmpresaParceira } from "./EmpresaParceira";
 
 export interface Cupom {
-  _id: string;
+  id: string;
   nome: string;
-  Valor: number;
+  valor: number;
   empresaParceria: EmpresaParceira;
-  Nivel: number;
   descricao: string;
   dataValidade: Date;
-  Ativo: boolean;
 }

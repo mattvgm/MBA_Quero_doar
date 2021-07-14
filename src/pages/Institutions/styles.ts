@@ -54,7 +54,7 @@ export const InfoBox = styled.div`
   align-items: center;
   margin: 10px;
   margin-top: 30px;
-  width: 65%;
+  width: 60%;
   height: 600px;
 `;
 
@@ -66,7 +66,7 @@ export const Menubox = styled.div`
   align-items: center;
   margin: 10px;
   margin-top: 30px;
-  width: 25%;
+  width: 30%;
   height: 600px;
 `;
 

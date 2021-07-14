@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import isAfter from "date-fns/isAfter";
 
 import PropTypes from "prop-types";
 import {
@@ -63,21 +64,8 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(
-  id: string,
-  name: string,
-  cc_number: string,
-  cupons_number: number,
-  donation_amount: string,
-  donation_date: string
-) {
-  return { id, name, cc_number, cupons_number, donation_amount, donation_date };
-}
-
 const CuponsTable: React.FC<CuponsProps> = ({ children, Cupons, ...rest }) => {
   const classes = useStyles();
-
-  const [currentDonation, setCurrentDonation] = useState<Cupom>(Cupons[0]);
 
   return (
     <TableContainer component={Paper}>
@@ -97,18 +85,25 @@ const CuponsTable: React.FC<CuponsProps> = ({ children, Cupons, ...rest }) => {
             ? Cupons.map((row) => (
                 <StyledTableRow key={row.nome}>
                   <StyledTableCell component="th" scope="row">
-                    {row.empresaParceria}
+                    {row.nome}
+                  </StyledTableCell>
+                  <StyledTableCell component="th" scope="row">
+                    {row.empresaParceria.nome}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {row.dataValidade}
+                    {new Date(row.dataValidade).toLocaleDateString("pt-BR")}
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {row.descricao}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {"R$" + row.Valor}
+                    {"R$" + row.valor}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{row.Ativo}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    {isAfter(new Date(row.dataValidade), new Date())
+                      ? "Ativo"
+                      : "Vencido"}
+                  </StyledTableCell>
                 </StyledTableRow>
               ))
             : "Empty"}

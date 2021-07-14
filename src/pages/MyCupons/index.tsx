@@ -1,21 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 
-import {
-  Container,
-  FormBox,
-  InfoBox,
-  Menubox,
-  LeftBox,
-  PageBody,
-} from "./styles";
-import {
-  HiOutlineUserCircle,
-  HiHeart,
-  HiHome,
-  HiIdentification,
-  HiGift,
-} from "react-icons/hi";
-import { Button, TextField } from "@material-ui/core";
+import { Container, FormBox, InfoBox, Menubox, PageBody } from "./styles";
 
 import TopBarComponent from "../../components/TopBarComponent";
 
@@ -23,17 +8,22 @@ import LoggedMenu from "../../components/LoggedMenu";
 import api from "../../services/api";
 import { Cupom } from "../../models/Cupom";
 import CuponsTable from "../../components/CuponsTable";
+import { HiHeart } from "react-icons/hi";
 
 const MyCupons: React.FC = () => {
   const [cupons, setCupons] = useState<Cupom[]>([]);
 
   useEffect(() => {
-    const cupons = api
-      .get<Cupom[]>("/MeusCupons/60ac36fa1f354d9b256cd5a6")
-      .then((res) => {
-        console.log("==========", res.data[0]);
-        setCupons(res.data);
+    api.get<Cupom[]>("/MeusCupons/60ac36fa1f354d9b256cd5a6").then((res) => {
+      let listaCupons: Cupom[] = [];
+
+      res.data.forEach((cupom: Cupom) => {
+        listaCupons.push(cupom);
       });
+
+      console.log("==========", listaCupons);
+      setCupons(res.data);
+    });
   }, []);
 
   return (

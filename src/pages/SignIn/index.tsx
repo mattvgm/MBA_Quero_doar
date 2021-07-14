@@ -115,7 +115,7 @@ const SignUp: React.FC = () => {
               </p>
               <p>
                 <FormLinks>
-                  <a href="https://teste">Esqueci minha senha</a>
+                  {/* <a href="https://teste">Esqueci minha senha</a> */}
                   <Link to="/signup">Quero me cadastrar</Link>
                 </FormLinks>
               </p>

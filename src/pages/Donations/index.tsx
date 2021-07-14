@@ -1,47 +1,60 @@
-import React, { useCallback, useState,useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from "react";
 
-import { Container,FormBox, InfoBox,Menubox, LeftBox, PageBody } from './styles';
-import {HiOutlineUserCircle,HiHeart ,HiHome ,HiIdentification, HiGift} from "react-icons/hi";
-import { Button, TextField } from '@material-ui/core';
+import {
+  Container,
+  FormBox,
+  InfoBox,
+  Menubox,
+  LeftBox,
+  PageBody,
+} from "./styles";
+import {
+  HiOutlineUserCircle,
+  HiHeart,
+  HiHome,
+  HiIdentification,
+  HiGift,
+} from "react-icons/hi";
+import { Button, TextField } from "@material-ui/core";
 
-import DonationTable from '../../components/DonationTable';
-import TopBarComponent from '../../components/TopBarComponent';
+import DonationTable from "../../components/DonationTable";
+import TopBarComponent from "../../components/TopBarComponent";
 
-
-import LoggedMenu from '../../components/LoggedMenu';
-import api from '../../services/api';
-import { Doacao } from '../../models/Doacao';
-
+import LoggedMenu from "../../components/LoggedMenu";
+import api from "../../services/api";
+import { Doacao } from "../../models/Doacao";
 
 const Donations: React.FC = () => {
+  const [donations, setDonations] = useState<Doacao[]>([]);
 
-const [donations, setDonations] = useState<Doacao[]>([])
-
-useEffect(() => {
-    const donations = api.get<Doacao[]>("/MinhasDoacoes/60ac36fa1f354d9b256cd5a6").then((res)=>{
-        console.log("==========",res.data[0]);
+  useEffect(() => {
+    const donations = api
+      .get<Doacao[]>("/MinhasDoacoes/60ac36fa1f354d9b256cd5a6")
+      .then((res) => {
         setDonations(res.data);
-    })
-}, [])
+      });
+  }, []);
 
-  return(
+  return (
     <Container>
-        <TopBarComponent></TopBarComponent>
+      <TopBarComponent></TopBarComponent>
 
-        <PageBody>
-            <Menubox>
-                <LoggedMenu/>
-            </Menubox>
-            <InfoBox>
-                <FormBox>
-                    <h1><HiHeart/>Doações realizadas</h1>
-                    <DonationTable Doacoes={donations}/>
-
-                </FormBox>
-            </InfoBox>
-        </PageBody>
-    </Container>  
-    )
-}
+      <PageBody>
+        <Menubox>
+          <LoggedMenu />
+        </Menubox>
+        <InfoBox>
+          <FormBox>
+            <h1>
+              <HiHeart />
+              Doações realizadas
+            </h1>
+            <DonationTable Doacoes={donations} />
+          </FormBox>
+        </InfoBox>
+      </PageBody>
+    </Container>
+  );
+};
 
 export default Donations;

@@ -35,6 +35,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     setLoggedUser(null);
     localStorage.removeItem("@App:loggedUser");
     localStorage.removeItem("@App:token");
+    alert.success("Deslogado com sucesso!");
   }
 
   async function login(email: string, password: string) {
@@ -51,8 +52,9 @@ export const AuthProvider: React.FC = ({ children }) => {
     await api
       .post("/Auth", logonUser)
       .then(async (resp) => {
-        const token = resp.data.token;
-        console.log(token);
+        const { userId, token } = resp.data;
+        console.log("userid", userId);
+        console.log("token", token);
 
         var b64string =
           "mlyDaLVs3SA0jQcHOlxZRiTZ0JvYvpGLxHN312KddWPHg8vlNSpXh0Xt61QelkEcz+UGnQ85fhMy/X0/cBmJAQ==";
@@ -63,7 +65,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         console.log("isvald", isTokenValid);
         api.defaults.headers.Authorization = `Bearer ${token}`;
         localStorage.setItem("@App:token", token);
-        await api.get<Doador>("/Doador/60ac36fa1f354d9b256cd5a6").then((rp) => {
+        await api.get<Doador>(`/Doador/${userId}`).then((rp) => {
           setLoggedUser(rp.data);
           localStorage.setItem("@App:loggedUser", JSON.stringify(rp.data));
           alert.success("Logado com sucesso!");
