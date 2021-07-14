@@ -33,6 +33,9 @@ const SignUp: React.FC = () => {
 
   const [selectedBirthDay, setSelectedBirthDay] = useState(new Date());
 
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPass, setloginPass] = useState("");
+
   const updateDate = useCallback((date: any) => {
     if (date) {
       setSelectedBirthDay(date);
@@ -40,8 +43,9 @@ const SignUp: React.FC = () => {
   }, []);
 
   const submitForm = useCallback(() => {
-    auth.login();
-  }, [auth]);
+    console.log("a====>", loginEmail, loginPass);
+    auth.login(loginEmail, loginPass);
+  }, [auth, loginEmail, loginPass]);
 
   var items = [
     {
@@ -96,6 +100,7 @@ const SignUp: React.FC = () => {
                   variant="outlined"
                   fullWidth
                   type="E-mail"
+                  onChange={(evt) => setLoginEmail(evt.target.value)}
                 />
               </p>
               <p>
@@ -105,6 +110,7 @@ const SignUp: React.FC = () => {
                   variant="outlined"
                   fullWidth
                   type="password"
+                  onChange={(evt) => setloginPass(evt.target.value)}
                 />
               </p>
               <p>
@@ -127,7 +133,6 @@ const SignUp: React.FC = () => {
           </FormBox>
         </InfoBox>
       </PageBody>
-      <header></header>
     </Container>
   );
 };
