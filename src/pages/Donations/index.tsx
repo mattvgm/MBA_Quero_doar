@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect, useContext } from "react";
 
 import {
   Container,
@@ -23,13 +23,17 @@ import TopBarComponent from "../../components/TopBarComponent";
 import LoggedMenu from "../../components/LoggedMenu";
 import api from "../../services/api";
 import { Doacao } from "../../models/Doacao";
+import AuthContext from "../../context/AuthenticationContext";
 
 const Donations: React.FC = () => {
   const [donations, setDonations] = useState<Doacao[]>([]);
+  const auth = useContext(AuthContext);
+  const user = auth.loggedUser?.nome;
+  const user_id = auth.loggedUser?.id;
 
   useEffect(() => {
     const donations = api
-      .get<Doacao[]>("/MinhasDoacoes/60ac36fa1f354d9b256cd5a6")
+      .get<Doacao[]>(`/MinhasDoacoes/${user_id}`)
       .then((res) => {
         setDonations(res.data);
       });
