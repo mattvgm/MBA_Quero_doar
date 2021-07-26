@@ -36,6 +36,7 @@ import TopBarComponent from "../../components/TopBarComponent";
 import CreditCardForm from "../../components/CreditCardForm";
 import LoggedMenu from "../../components/LoggedMenu";
 import { Instituicao } from "../../models/Instituição";
+import { Pagamento } from "../../models/Pagamento";
 import { DonationsService } from "../../services/DonationsService";
 import AuthContext from "../../context/AuthenticationContext";
 
@@ -46,22 +47,50 @@ const PaymentWindow: React.FC = () => {
 
   const auth = useContext(AuthContext);
   const user_id = auth.loggedUser?.id;
+  let newCCInfo: Pagamento = {} as Pagamento;
+
+  const [ccInfo, setCcInfo] = useState<Pagamento>({} as Pagamento);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setdonationValue((event.target as HTMLInputElement).value);
   };
 
+  const getCCInfo = useCallback(
+    (dados: any) => {
+      //
+      // newCCInfo.
+      // setCcInfo;
+      newCCInfo.numeroCartao = dados.number;
+      newCCInfo.NomeCartao = dados.name;
+      newCCInfo.CodigoSegurancaCartao = dados.cvc;
+      newCCInfo.ValidadeCartao = dados.expiry;
+      setCcInfo(newCCInfo);
+      console.log("state", ccInfo);
+      console.log("var", newCCInfo);
+    },
+    [ccInfo, newCCInfo]
+  );
+
   const CreateDonation = useCallback(() => {
+    setCcInfo(newCCInfo);
     const donationService = new DonationsService();
     if (user_id) {
       const createdDonation = donationService.CreateDonation(
         user_id,
-        "60ac36fa1f354d9b256cd5a0",
-        donationValue
+        state.instituicao.id,
+        donationValue,
+        ccInfo
       );
-      history.push({ pathname: "/donations", state: {} });
     }
-  }, [donationValue, history, state.instituicao.id]);
+    history.push({ pathname: "/Institutions", state: {} });
+  }, [
+    ccInfo,
+    donationValue,
+    history,
+    newCCInfo,
+    state.instituicao.id,
+    user_id,
+  ]);
 
   return (
     <Container>
@@ -104,14 +133,14 @@ const PaymentWindow: React.FC = () => {
                 </RadioGroup>
               </DonationSelect>
               <CCSelect>
-                <CreditCardForm />
+                <CreditCardForm FatherFunction={getCCInfo} />
                 <form action="https://alo" method="post">
                   <Button
                     variant="contained"
                     color="primary"
                     onClick={CreateDonation}
                   >
-                    Realizar o pagameno
+                    Realizar o pagamento
                   </Button>
                 </form>
               </CCSelect>

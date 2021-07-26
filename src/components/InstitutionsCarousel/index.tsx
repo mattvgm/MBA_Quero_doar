@@ -77,6 +77,7 @@ const InstitutionsCarousel: React.FC<InstProps> = ({
       <Carousel
         autoPlay={true}
         infiniteLoop
+        interval={20000}
         showThumbs={false}
         showIndicators={false}
         showStatus={false}

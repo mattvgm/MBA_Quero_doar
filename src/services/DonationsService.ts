@@ -7,6 +7,7 @@
 // } from "../mockedData/mockedData";
 import { Doacao } from "../models/Doacao";
 import { Instituicao } from "../models/Instituição";
+import { Pagamento } from "../models/Pagamento";
 import api from "./api";
 
 export class DonationsService {
@@ -19,8 +20,11 @@ export class DonationsService {
   public CreateDonation(
     user_id: string,
     instituicao: string,
-    donationValue: string
+    donationValue: string,
+    cartao_dados: Pagamento
   ) {
+    console.log("alooo", cartao_dados);
+
     let valor = 10.0;
 
     let comboCupons = [];
@@ -52,10 +56,10 @@ export class DonationsService {
       idInstituicao: instituicao,
       pagamento: {
         valor: valor,
-        nomeCartao: "JOAO SILVA",
-        numeroCartao: "XXXXXXXXXXXX1234",
-        codigoSegurancaCartao: "XXX",
-        validadeCartao: "XXXXX",
+        nomeCartao: cartao_dados.NomeCartao,
+        numeroCartao: cartao_dados.numeroCartao,
+        codigoSegurancaCartao: cartao_dados.CodigoSegurancaCartao,
+        validadeCartao: cartao_dados.ValidadeCartao,
         statusProcessamento: "Pago",
       },
       idCupom: [...comboCupons],

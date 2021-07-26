@@ -2,7 +2,7 @@ export interface Pagamento {
   _id: string;
   Valor: number;
   NomeCartao: string;
-  NumeroCartao: string;
+  numeroCartao: string;
   CodigoSegurancaCartao: string;
   ValidadeCartao: string;
 }

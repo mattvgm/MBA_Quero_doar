@@ -120,7 +120,7 @@ const DonationTable: React.FC<DonationProps> = ({
                     {row.instituicao.nome}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {row.pagamento.NumeroCartao}
+                    {"XXXXXXXXXXXX" + row.pagamento.numeroCartao.slice(-4)}
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {row.cupom.length}

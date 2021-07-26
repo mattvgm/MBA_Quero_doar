@@ -36,11 +36,13 @@ export default class PaymentForm extends React.Component {
 
   handleInputFocus = (e) => {
     this.setState({ focus: e.target.id });
+    this.props.FatherFunction(this.state);
   }
   
   handleInputChange = (e) => {
     const { id, value } = e.target;
     this.setState({ [id]: value });
+    this.props.FatherFunction(this.state);
   }
 
   teste = (e)=>{

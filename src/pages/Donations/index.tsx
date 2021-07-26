@@ -35,9 +35,10 @@ const Donations: React.FC = () => {
     const donations = api
       .get<Doacao[]>(`/MinhasDoacoes/${user_id}`)
       .then((res) => {
+        console.log(res.data);
         setDonations(res.data);
       });
-  }, []);
+  }, [user_id]);
 
   return (
     <Container>
